@@ -6,7 +6,7 @@ function Questoes() {
   const [questaoAtual, setQuestaoAtual] = useState(1);
   const [acertos, setAcertos] = useState(0);
   const [acertou, setAcertou] = useState(null);
-  const [disabled, setDisabled] = useState(false); // Estado para controlar a desabilitação dos botões
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("acertos", 0);
@@ -14,7 +14,6 @@ function Questoes() {
 
   const handleResposta = (respostaCorreta) => {
     if (!disabled) {
-      // Verifique se os botões estão habilitados antes de processar a resposta
       if (respostaCorreta) {
         const acertosLocalStorage = Number(localStorage.getItem("acertos")) + 1;
         localStorage.setItem("acertos", acertosLocalStorage);
@@ -24,13 +23,13 @@ function Questoes() {
         setAcertou(false);
       }
 
-      setDisabled(true); // Desabilita os botões após a resposta do usuário
+      setDisabled(true);
 
       setTimeout(() => {
         if (questaoAtual < 10) {
           setQuestaoAtual(questaoAtual + 1);
           setAcertou(null);
-          setDisabled(false); // Habilita os botões para a próxima pergunta
+          setDisabled(false);
         } else {
           const acertosLocalStorage = Number(localStorage.getItem("acertos"));
           const highScore = Number(localStorage.getItem("highScore"));
@@ -40,10 +39,9 @@ function Questoes() {
           }
 
           alert(`Total de Acertos: ${acertosLocalStorage}`);
-          // Redirecione para a tela inicial
           window.location.href = "/";
         }
-      }, 2000); // Tempo de espera para a próxima pergunta
+      }, 2000);
     }
   };
 
@@ -70,7 +68,7 @@ function Questoes() {
                     key === database[questaoAtual].correta.toString()
                   )
                 }
-                disabled={disabled} // Desabilite os botões quando o estado for verdadeiro
+                disabled={disabled}
               >
                 {database[questaoAtual].respostas[key]}
               </button>
