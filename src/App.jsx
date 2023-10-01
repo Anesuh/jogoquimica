@@ -1,9 +1,17 @@
-import React, { useState } from "react";
-import Resposta from "./Components/Resposta";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import TelaInicial from "./Components/TelaInicial";
+import Questoes from "./Components/Pages/Questao";
+
 function App() {
-  return <div className="App">
-    <Resposta />
-  </div>;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<TelaInicial />} />
+        <Route path="/questoes" element={<Questoes />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
